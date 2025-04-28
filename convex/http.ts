@@ -22,7 +22,7 @@ const validatePayload = async (
 
 		return event;
 	} catch (error) {
-		console.error("Clerk webhook request could not be verified");
+		console.error("Clerk webhook request could not be verified:", error);
 		return;
 	}
 };
