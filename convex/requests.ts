@@ -48,3 +48,33 @@ export const get = query({
 		return requestsWithSender;
 	},
 });
+
+export const count = query({
+	args: {},
+	handler: async (ctx, args) => {
+		const identity = await ctx.auth.getUserIdentity(); // Get the authenticated user's identity
+
+		// Ensure the user is authenticated
+		if (!identity) {
+			throw new Error("Unauthorized");
+		}
+
+		// Fetch the current user's record from the database using their Clerk ID
+		const currentUser = await getUserByClerkId({
+			ctx,
+			clerkId: identity.subject,
+		});
+
+		if (!currentUser) {
+			throw new ConvexError("User not found");
+		}
+
+		// Fetch all requests where the current user is the receiver
+		const requests = await ctx.db
+			.query("requests")
+			.withIndex("by_receiver", (q) => q.eq("receiver", currentUser._id))
+			.collect();
+
+		return requests.length;
+	},
+});
