@@ -27,7 +27,7 @@ export const get = query({
 			.withIndex("by_memberId", (q) => q.eq("memberId", currentUser._id))
 			.collect();
 
-		const conversations = Promise.all(
+		const conversations = await Promise.all(
 			conversationMemberships?.map(async (membership) => {
 				const conversation = await ctx.db.get(membership.conversationId);
 
@@ -55,11 +55,13 @@ export const get = query({
 						(membership) => membership.memberId !== currentUser._id
 					)[0];
 
-					const otherMember = await ctx.db.get(otherMembership._id);
+					const otherMember = await ctx.db.get(otherMembership.memberId);
 
 					return { conversation, otherMember };
 				}
 			})
 		);
+
+		return conversationsWithDetails;
 	},
 });
