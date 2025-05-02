@@ -26,6 +26,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.1",
+    "react-textarea-autosize": "^8.5.9",
     "sonner": "^2.0.3",
     "svix": "^1.64.1",
     "tailwind-merge": "^3.2.0",
