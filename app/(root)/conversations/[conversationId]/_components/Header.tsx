@@ -51,7 +51,9 @@ const Header = ({ imageUrl, name, options }: Props) => {
 										onClick={option.onClick}
 										className={cn("font-semibold", {
 											"text-destructive": option.destructive,
-										})}></DropdownMenuItem>
+										})}>
+										{option.label}
+									</DropdownMenuItem>
 								);
 							})}
 						</DropdownMenuContent>
