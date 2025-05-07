@@ -157,7 +157,7 @@ export const deleteGroup = mutation({
 			)
 			.collect();
 
-		if (!memberships || memberships.length !== 2) {
+		if (!memberships || memberships.length <= 1) {
 			throw new ConvexError("This conversation does not have any members");
 		}
 
