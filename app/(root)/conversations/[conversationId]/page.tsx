@@ -50,10 +50,10 @@ const ConversationPage = ({ params: { conversationId } }: Props) => {
 				name={
 					(conversation.isGroup
 						? conversation.name
-						: conversation.otherMember.username) || ""
+						: conversation.otherMember?.username) || ""
 				}
 				imageUrl={
-					conversation.isGroup ? undefined : conversation.otherMember.imageUrl
+					conversation.isGroup ? undefined : conversation.otherMember?.imageUrl
 				}
 				options={
 					conversation.isGroup
