@@ -3,9 +3,7 @@ import { query } from "./_generated/server";
 import { getUserByClerkId } from "./_utils";
 
 export const get = query({
-	args: {
-		id: v.id("conversations"),
-	},
+	args: {},
 	handler: async (ctx, args) => {
 		const identity = await ctx.auth.getUserIdentity(); // Get the authenticated user's identity
 
@@ -51,5 +49,7 @@ export const get = query({
 				return friend;
 			})
 		);
+
+		return friends;
 	},
 });
